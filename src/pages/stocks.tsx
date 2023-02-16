@@ -8,8 +8,8 @@ import { formatResponseData } from "../helper/format-response-data"
 
 export const fetchSchema = z.object({
   ticker: z.string(),
-  startDate: z.string(), // TODO: Add date validation
-  endDate: z.string(), // TODO: Add date validation
+  startDate: z.string(),
+  endDate: z.string(),
 })
 
 const Stocks: NextPage<StocksProps> = (props) => {

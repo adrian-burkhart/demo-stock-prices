@@ -1,5 +1,12 @@
 import { useRouter } from "next/router"
-import { ButtonUi, DateInputUi, FormUi, SelectInputUi } from "../ui"
+import React from "react"
+import {
+  ButtonUi,
+  DateInputUi,
+  DisclaimerUi,
+  FormUi,
+  SelectInputUi,
+} from "../ui"
 
 const AVAILABLE_TICKERS = [
   "MMM",
@@ -44,22 +51,26 @@ export interface Form extends HTMLFormElement {
 }
 
 export const StockSearch = () => {
+  const [loading, setLoading] = React.useState(false)
   const router = useRouter()
 
   const handleSubmit = (event: React.FormEvent<Form>) => {
     event.preventDefault()
+    setLoading(true)
+    console.log("first")
 
     void router.push(
       `/stocks/?ticker=${event.currentTarget.elements.ticker.value}&startDate=${event.currentTarget.elements.startDate.value}&endDate=${event.currentTarget.elements.endDate.value}`
     )
+    setLoading(false)
   }
 
   return (
     <>
-      <p className="text-white">
+      <DisclaimerUi>
         Only works with dates between 2017-09-01 and 2017-10-31.
-      </p>
-      <FormUi action="/search/stocks" onSubmit={handleSubmit}>
+      </DisclaimerUi>
+      <FormUi onSubmit={handleSubmit}>
         <SelectInputUi
           label={"Ticker"}
           name={"ticker"}
@@ -68,7 +79,7 @@ export const StockSearch = () => {
 
         <DateInputUi
           name="startDate"
-          defaultDate={"2017-10-30"}
+          defaultDate={"2017-09-01"}
           label="Start Date"
           minDate={"2017-09-01"}
           maxDate={"2017-10-31"}
@@ -82,7 +93,9 @@ export const StockSearch = () => {
           maxDate={"2017-10-31"}
         />
 
-        <ButtonUi type="submit">Search</ButtonUi>
+        <ButtonUi loading={loading} type="submit">
+          Search
+        </ButtonUi>
       </FormUi>
     </>
   )

@@ -13,9 +13,14 @@ export const formatResponseData = (data: z.infer<typeof StocksSchema>) => {
 
   const maxDrawdown = calculateMaxDrawdown(stockPrices)
 
+  const chartData = stockPrices.map((price, index) => ({
+    x: index,
+    y: price,
+  }))
+
   return {
     maxDrawdown,
     simpleReturn,
-    stockPrices,
+    chartData,
   }
 }
