@@ -15,6 +15,18 @@ describe("formatResponseData", () => {
     const expected = {
       simpleReturn: 900,
       maxDrawdown: 99.5,
+      chartData: [
+        { x: 0, y: 10 },
+        { x: 1, y: 50 },
+        { x: 2, y: 200 },
+        { x: 3, y: 20 },
+        { x: 4, y: 30 },
+        { x: 5, y: 50 },
+        { x: 6, y: 1 },
+        { x: 7, y: 200 },
+        { x: 8, y: 70 },
+        { x: 9, y: 100 },
+      ],
     }
 
     const actual = formatResponseData(data)
@@ -31,6 +43,10 @@ describe("formatResponseData", () => {
     const expected = {
       simpleReturn: -50,
       maxDrawdown: 50,
+      chartData: [
+        { x: 0, y: 200 },
+        { x: 1, y: 100 },
+      ],
     }
 
     const actual = formatResponseData(data)
