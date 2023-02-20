@@ -33,6 +33,7 @@ describe("formatResponseData", () => {
 
     expect(actual).toEqual(expected)
   })
+
   it("should return simpleReturn and maxDrawdown correctly when price decreased", () => {
     const data: z.infer<typeof StocksSchema> = {
       datatable: {

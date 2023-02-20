@@ -57,7 +57,6 @@ export const StockSearch = () => {
   const handleSubmit = (event: React.FormEvent<Form>) => {
     event.preventDefault()
     setLoading(true)
-    console.log("first")
 
     void router.push(
       `/stocks/?ticker=${event.currentTarget.elements.ticker.value}&startDate=${event.currentTarget.elements.startDate.value}&endDate=${event.currentTarget.elements.endDate.value}`
