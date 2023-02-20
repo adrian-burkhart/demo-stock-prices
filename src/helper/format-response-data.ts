@@ -4,10 +4,10 @@ import { calculateSimpleReturn } from "./calculate-simple-return"
 import type { StocksSchema } from "./fetch-stocks"
 
 export const formatResponseData = (data: z.infer<typeof StocksSchema>) => {
-  const stockPrices = data.datatable.data.flat().reverse()
+  const stockPrices = [...data.datatable.data.flat().reverse()]
 
-  const [startingPrice = 0, ...middlePrices] = stockPrices
-  const finalPrice = middlePrices.pop() ?? 0
+  const startingPrice = stockPrices[0] ?? 0
+  const finalPrice = stockPrices[stockPrices.length - 1] ?? 0
 
   const simpleReturn = calculateSimpleReturn(startingPrice, finalPrice)
 
